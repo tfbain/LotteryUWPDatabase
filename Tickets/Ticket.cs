@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Tickets
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public abstract class Ticket
     {
         // This is the base class Ticket, Euro and Lotto are subclasses
@@ -31,32 +34,60 @@ namespace Tickets
             }
         }      // autoproperty, integer array, with logic
 
-        public string day;  // This could be a dictionary object
+        public DayOfWeek Day { get; set; }
 
-        public DateTime DateOfPurchase { get; set; } // date of Purchase
+        private DateTime _dateOfPurchase;
+        public DateTime DateOfPurchase { 
+            get { return _dateOfPurchase; } 
+            set {
+                _dateOfPurchase = value;
+                Day = nextAvailableDraw();
+            } } // date of Purchase
 
         //public List<string> contacts { get; set;}   //syntax for a list named contacts
         public Ticket() // CONSTRUCTOR
         {
+
             DateOfPurchase = DateTime.Now;
+            customer = new Customer();
+  
         }
 
         public override abstract string ToString(); // This overrides the standard String ToString() class.
 
-        public static int[] RandomNum()
+        public DayOfWeek nextAvailableDraw()
         {
-            Random rand = new Random();
-
-            int min = 1;
-            int max = 50;
-
-            int[] randNums = new int[7];
-            for (int i = 0; i < randNums.Length; i++)
+            TimeSpan timePurchased;
+            DayOfWeek nextAvailableDrawDay;
+            timePurchased = DateOfPurchase.TimeOfDay;
+            if ((DateOfPurchase.DayOfWeek == DayOfWeek.Wednesday && timePurchased >= TimeSpan.FromHours(18))
+                || DateOfPurchase.DayOfWeek == DayOfWeek.Thursday
+                || DateOfPurchase.DayOfWeek == DayOfWeek.Friday
+                || (DateOfPurchase.DayOfWeek == DayOfWeek.Saturday && timePurchased < TimeSpan.FromHours(18)))
             {
-                randNums[i] = rand.Next(min, max);
+                nextAvailableDrawDay = DayOfWeek.Saturday;
             }
-            return randNums;
+            else
+            {
+                nextAvailableDrawDay = DayOfWeek.Wednesday;
+            }
+            return nextAvailableDrawDay;
         }
+
+        //public static int[] RandomNum()
+        //{
+        //    Random rand = new Random();
+
+        //    int min = 1;
+        //    int max = 50;
+
+        //    int[] randNums = new int[7];
+        //    for (int i = 0; i < randNums.Length; i++)
+        //    {
+        //        randNums[i] = rand.Next(min, max);
+        //    }
+        //    return randNums;
+        //}
 
     }
 }

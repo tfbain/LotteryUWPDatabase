@@ -18,7 +18,7 @@ namespace Tickets
 
             sb.Append(customer.Name);
             sb.Append(customer.Email);
-            sb.Append(day);
+            sb.Append(Day);
             sb.Append(Numbers[1]);
             sb.Append(Country);
             message = sb.ToString();
