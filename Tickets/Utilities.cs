@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tickets
 {
-    class Utilities
+    public class Utilities
     {
         public static Boolean NumberInRange(int chosenNumber, int from, int to)
         {
@@ -16,6 +16,18 @@ namespace Tickets
             return inRange;
         }
 
+        public static Boolean checkAllBalls(int to, int[] arr)
+        {
+            Boolean bOK = true;
+            foreach (int number in arr)  // value is the numbers array being set through the object
+            {
+                if (!(NumberInRange(number, 1, to))) bOK =false;
+            }
+            
+            if (bOK) bOK = ArrayNoDuplicates(arr);
+            
+            return bOK;
+        } 
         public static Boolean NumberNotDuplicate(int chosenNumber, int[] arr)
         {
 
@@ -33,7 +45,18 @@ namespace Tickets
             }
             return notDuplicate;
         }
+        public static Boolean ArrayNoDuplicates(int[] arr)
+        {
+           Boolean notDuplicate = true;
 
+            if (arr != null && arr.Length != 0)
+            {
+                var groups = arr.GroupBy(v => v);
+                foreach (var group in groups)
+                    if (group.Count() > 1) notDuplicate = false;
+             }
+            return notDuplicate;
+        }
 
         public static int[] generateRandomBalls(int to, int[] arr)
         {

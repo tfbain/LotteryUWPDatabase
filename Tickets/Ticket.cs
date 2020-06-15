@@ -20,18 +20,15 @@ namespace Tickets
             get { return _numbers; }
             set
             {
-                Boolean bOK = true;
-                foreach (int number in value)  // value is the numbers array being set through the object
+                if (!Utilities.checkAllBalls(49, value))
                 {
-                    if (number < 0 || number > 49)  
-                    {
-                        bOK = false;
-                        throw new ArgumentException("The ball numbers must be between 1 and 49");
-                    }
-
+                    throw new ArgumentException("The ball numbers must be between 1 and 49");
                 }
-                if (bOK) { _numbers = value; }
-            }
+                else
+                {
+                    _numbers = value;
+                }
+             }
         }      // autoproperty, integer array, with logic
 
         public DayOfWeek Day { get; set; }
