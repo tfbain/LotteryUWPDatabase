@@ -15,28 +15,55 @@ namespace Tickets
             get { return _bonusBall; }
             set
             {
-                if (value > 0 && value < 50)  // value is value of bonusball being set through the object
+                if(!(value > 0 && value < 50))
                 {
-                    _bonusBall = value;
+                    throw new ArgumentException("The bonus ball must be between 1 and 49");
+                }
+                else if (!validateBonus(value))
+                {
+                    throw new ArgumentException("The bonus ball must not match any of the Lottery Numbers");
                 }
                 else
                 {
-                    throw new ArgumentException("The ball number must be between 1 and 49");
+                    _bonusBall = value;
                 }
             }
         }
         public string retailerCode { get; set; }
 
-        public LottoT()
+        public LottoT():base()
         {
+            _bonusBall = generateBonusBall();
         }
+
+        public int generateBonusBall()
+        {
+            Random rand = new Random();
+            int randNo = 0;
+            do
+            {
+                randNo = rand.Next(1, 49) + 1;
+            } while (!validateBonus(randNo));
+
+            return randNo;
+        }
+
+        public Boolean validateBonus(int Bonus)
+        {
+            Boolean bOK = true;
+            int index = Array.IndexOf(Numbers, Bonus);
+
+            if (index >= 0) bOK = false;
+            return bOK;
+        }
+
         public override string ToString() // This overrides the ToString() class in Ticket.
         {
             string message;
             StringBuilder sb = new StringBuilder();
 
-            sb.Append(customer.Name);
-            sb.Append(customer.Email);
+            sb.Append(Customer.Name);
+            sb.Append(Customer.Email);
             sb.Append(Day);
             sb.Append(Numbers[1]);
             sb.Append(BonusBall);

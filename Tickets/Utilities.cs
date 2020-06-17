@@ -8,14 +8,7 @@ namespace Tickets
 {
     public class Utilities
     {
-        public static Boolean NumberInRange(int chosenNumber, int from, int to)
-        {
-            Boolean inRange = false;
-            if (chosenNumber >= from && chosenNumber <= to)
-                inRange = true;
-            return inRange;
-        }
-
+ 
         public static Boolean checkAllBalls(int to, int[] arr)
         {
             Boolean bOK = true;
@@ -27,7 +20,14 @@ namespace Tickets
             if (bOK) bOK = ArrayNoDuplicates(arr);
             
             return bOK;
-        } 
+        }
+        public static Boolean NumberInRange(int chosenNumber, int from, int to)
+        {
+            Boolean inRange = false;
+            if (chosenNumber >= from && chosenNumber <= to)
+                inRange = true;
+            return inRange;
+        }
         public static Boolean NumberNotDuplicate(int chosenNumber, int[] arr)
         {
 
@@ -72,6 +72,19 @@ namespace Tickets
             }
             return arr;
         }
+
+        //public static int generateBonus(int to)
+        //{
+        //    int randNo = 0;
+        //    int BonusBall=0;
+        //    Random rand = new Random();
+        //    do
+        //    {
+        //        randNo = rand.Next(1, to) + 1;
+        //    } while (!NumberNotDuplicate(randNo, arr));
+
+        //    return BonusBall;
+        //}
 
     }
 }

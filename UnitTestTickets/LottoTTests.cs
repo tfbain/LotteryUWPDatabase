@@ -38,15 +38,14 @@ namespace UnitTestTickets
             //act
             lotTicket.Numbers = testNumbers;
 
-            //assert   -  want to check this throws an exception
+            // assert
             Assert.AreEqual(testNumbers, lotTicket.Numbers);  
-            //AssertFailedException.Equals(testNumbers, lotTicket.Numbers);
-        }
+         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException),
                "The ball numbers must be between 1 and 49")]
-        public void TestAllWithInvalidBalls()  // can this be refactored to test for example one with zero
+        public void TestAllWithInvalidBalls()  // add data testing to allow for extreme testing.
         {
             //arrange
             LottoT lotTicket = new LottoT();
@@ -59,7 +58,7 @@ namespace UnitTestTickets
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException),
-               "The ball number must be between 1 and 49")]
+               "The bonus ball must be between 1 and 49")]
         public void TestInvalidBonusBall()
         {
             //arrange
@@ -85,8 +84,21 @@ namespace UnitTestTickets
             catch (Exception ex)
             {
                 Assert.IsTrue(ex is ArgumentException);
-                Assert.AreEqual(ex.Message, "The ball number must be between 1 and 49");
+                Assert.AreEqual(ex.Message, "The bonus ball must be between 1 and 49");
             }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException),
+      "The bonus ball must not match any of the Lottery Numbers")]
+        public void TestMatchingBonusBall()
+        {
+            //arrange
+            // Test the bonus ball throws exception for an invalid entry
+            LottoT lotto = new LottoT();
+            lotto.Numbers = new int[] { 3, 5, 17, 34, 41, 22 };
+            //act
+            lotto.BonusBall = 17;
         }
     }
 }

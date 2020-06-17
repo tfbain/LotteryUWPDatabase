@@ -12,7 +12,7 @@ namespace Tickets
     public abstract class Ticket
     {
         // This is the base class Ticket, Euro and Lotto are subclasses
-        public Customer customer { get; set; }   // property
+        public Customer Customer { get; set; }   // property
 
         private int[] _numbers = new int[6];      // field
         public int[] Numbers
@@ -46,8 +46,8 @@ namespace Tickets
         {
 
             DateOfPurchase = DateTime.Now;
-            customer = new Customer();
-  
+            Customer = new Customer();
+            _numbers = Utilities.generateRandomBalls(49, _numbers);
         }
 
         public override abstract string ToString(); // This overrides the standard String ToString() class.
@@ -70,21 +70,6 @@ namespace Tickets
             }
             return nextAvailableDrawDay;
         }
-
-        //public static int[] RandomNum()
-        //{
-        //    Random rand = new Random();
-
-        //    int min = 1;
-        //    int max = 50;
-
-        //    int[] randNums = new int[7];
-        //    for (int i = 0; i < randNums.Length; i++)
-        //    {
-        //        randNums[i] = rand.Next(min, max);
-        //    }
-        //    return randNums;
-        //}
 
     }
 }
