@@ -123,16 +123,21 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Content.xaml.cs">
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\Euro.cs" />
+    <Compile Include="Models\Lotto.cs" />
+    <Compile Include="Models\Ticket.cs" />
+    <Compile Include="Models\Utilities.cs" />
+    <Compile Include="Views\Content.xaml.cs">
       <DependentUpon>Content.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Customer.xaml.cs">
+    <Compile Include="Views\Customer.xaml.cs">
       <DependentUpon>Customer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Euro.xaml.cs">
+    <Compile Include="Views\Euro.xaml.cs">
       <DependentUpon>Euro.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Lotto.xaml.cs">
+    <Compile Include="Views\Lotto.xaml.cs">
       <DependentUpon>Lotto.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -165,19 +170,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\Content.xaml">
+    <Page Include="Views\Content.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Customer.xaml">
+    <Page Include="Views\Customer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Euro.xaml">
+    <Page Include="Views\Euro.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Lotto.xaml">
+    <Page Include="Views\Lotto.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -200,10 +205,8 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Tickets\Tickets.csproj">
-      <Project>{b304da25-11a3-4c21-9c9c-20f3ded65947}</Project>
-      <Name>Tickets</Name>
-    </ProjectReference>
+    <Folder Include="Repository\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

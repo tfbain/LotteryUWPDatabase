@@ -4,21 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tickets
+namespace LotteryApp.Models
 {
     public class Utilities
     {
- 
+
         public static Boolean checkAllBalls(int to, int[] arr)
         {
             Boolean bOK = true;
             foreach (int number in arr)  // value is the numbers array being set through the object
             {
-                if (!(NumberInRange(number, 1, to))) bOK =false;
+                if (!(NumberInRange(number, 1, to))) bOK = false;
             }
-            
+
             if (bOK) bOK = ArrayNoDuplicates(arr);
-            
+
             return bOK;
         }
         public static Boolean NumberInRange(int chosenNumber, int from, int to)
@@ -47,14 +47,14 @@ namespace Tickets
         }
         public static Boolean ArrayNoDuplicates(int[] arr)
         {
-           Boolean notDuplicate = true;
+            Boolean notDuplicate = true;
 
             if (arr != null && arr.Length != 0)
             {
                 var groups = arr.GroupBy(v => v);
                 foreach (var group in groups)
                     if (group.Count() > 1) notDuplicate = false;
-             }
+            }
             return notDuplicate;
         }
 
@@ -66,7 +66,7 @@ namespace Tickets
             {
                 do
                 {
-                    randNo = rand.Next(1,to) + 1;
+                    randNo = rand.Next(1, to) + 1;
                 } while (!NumberNotDuplicate(randNo, arr));
                 arr[i] = randNo;
             }
@@ -75,3 +75,4 @@ namespace Tickets
 
     }
 }
+

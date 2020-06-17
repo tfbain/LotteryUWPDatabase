@@ -1,7 +1,7 @@
 ﻿
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tickets;
+using LotteryApp.Models;
 
 namespace UnitTestTickets
 {

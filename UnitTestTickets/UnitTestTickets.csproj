@@ -162,9 +162,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Tickets\Tickets.csproj">
-      <Project>{b304da25-11a3-4c21-9c9c-20f3ded65947}</Project>
-      <Name>Tickets</Name>
+    <ProjectReference Include="..\LotteryApp\LotteryApp.csproj">
+      <Project>{a997a32a-8bfd-4bdd-8e3e-847bee9e2dec}</Project>
+      <Name>LotteryApp</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
