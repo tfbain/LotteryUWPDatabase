@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace Tickets
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public abstract class Ticket
     {
         // This is the base class Ticket, Euro and Lotto are subclasses
-        public Customer customer { get; set; }   // property
+        public Customer Customer { get; set; }   // property
 
         private int[] _numbers = new int[6];      // field
         public int[] Numbers
@@ -17,45 +20,55 @@ namespace Tickets
             get { return _numbers; }
             set
             {
-                Boolean bOK = true;
-                foreach (int number in value)  // value is the numbers array being set through the object
+                if (!Utilities.checkAllBalls(49, value))
                 {
-                    if (number < 0 | number > 49)  // use single | as we want both conditoins to be tested
-                    {
-                        bOK = false;
-                        throw new Exception("The ball numbers must be between 1 and 49");
-                    }
-
+                    throw new ArgumentException("The ball numbers must be between 1 and 49");
                 }
-                if (bOK) { _numbers = value; }
-            }
+                else
+                {
+                    _numbers = value;
+                }
+             }
         }      // autoproperty, integer array, with logic
 
-        public string day;  // This could be a dictionary object
+        public DayOfWeek Day { get; set; }
 
-        public DateTime DateOfPurchase { get; set; } // date of Purchase
+        private DateTime _dateOfPurchase;
+        public DateTime DateOfPurchase { 
+            get { return _dateOfPurchase; } 
+            set {
+                _dateOfPurchase = value;
+                Day = nextAvailableDraw();
+            } } // date of Purchase
 
         //public List<string> contacts { get; set;}   //syntax for a list named contacts
         public Ticket() // CONSTRUCTOR
         {
+
             DateOfPurchase = DateTime.Now;
+            Customer = new Customer();
+            _numbers = Utilities.generateRandomBalls(49, _numbers);
         }
 
         public override abstract string ToString(); // This overrides the standard String ToString() class.
 
-        public static int[] RandomNum()
+        public DayOfWeek nextAvailableDraw()
         {
-            Random rand = new Random();
-
-            int min = 1;
-            int max = 50;
-
-            int[] randNums = new int[7];
-            for (int i = 0; i < randNums.Length; i++)
+            TimeSpan timePurchased;
+            DayOfWeek nextAvailableDrawDay;
+            timePurchased = DateOfPurchase.TimeOfDay;
+            if ((DateOfPurchase.DayOfWeek == DayOfWeek.Wednesday && timePurchased >= TimeSpan.FromHours(18))
+                || DateOfPurchase.DayOfWeek == DayOfWeek.Thursday
+                || DateOfPurchase.DayOfWeek == DayOfWeek.Friday
+                || (DateOfPurchase.DayOfWeek == DayOfWeek.Saturday && timePurchased < TimeSpan.FromHours(18)))
             {
-                randNums[i] = rand.Next(min, max);
+                nextAvailableDrawDay = DayOfWeek.Saturday;
             }
-            return randNums;
+            else
+            {
+                nextAvailableDrawDay = DayOfWeek.Wednesday;
+            }
+            return nextAvailableDrawDay;
         }
 
     }

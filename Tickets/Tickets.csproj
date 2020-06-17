@@ -125,6 +125,7 @@
     <Compile Include="Lotto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ticket.cs" />
+    <Compile Include="Utilities.cs" />
     <EmbeddedResource Include="Properties\Tickets.rd.xml" />
   </ItemGroup>
   <ItemGroup>
