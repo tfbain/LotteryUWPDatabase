@@ -8,17 +8,19 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LotteryApp.Repository
 {
-    public class CustomerContext : DbContext
+    public class LotteryContext : DbContext
     {
         /// <summary>
         /// Creates a new DbContext.
         /// </summary>
-        public CustomerContext(DbContextOptions<CustomerContext> options) : base(options)
+        public LotteryContext(DbContextOptions<LotteryContext> options) : base(options)
         { }
 
         /// <summary>
         /// Gets the customers DbSet.
         /// </summary>
         public DbSet<Customer> Customers { get; set; } // DbSet is used to query and save instances of the entity Customers
+       
+        // ****  Add a DbSet for each entity 
     }
 }
