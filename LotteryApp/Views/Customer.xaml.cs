@@ -13,7 +13,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Tickets;
+
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -29,11 +29,11 @@ namespace LotteryApp.Pages
             this.InitializeComponent();
         }
 
-        void OnClick_btnCreate(object sender, RoutedEventArgs e)
-        {
-            Tickets.Customer tempCust = new Tickets.Customer(txtName.ToString(), txtPhone.ToString(), txtEmail.ToString());
-            App.currentCustomer = tempCust;      
-        }
+       //void OnClick_btnCreate(object sender, RoutedEventArgs e)
+       // {
+       //    Tickets.Customer tempCust = new Tickets.Customer(txtName.ToString(), txtPhone.ToString(), txtEmail.ToString());
+       //   App.currentCustomer = tempCust;      
+       // }
         void OnClick_btnCancel(object sender, RoutedEventArgs e)
         {
             txtEmail.Text = "";

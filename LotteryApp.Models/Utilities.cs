@@ -9,7 +9,7 @@ namespace LotteryApp.Models
     public class Utilities
     {
 
-        public static Boolean checkAllBalls(int to, int[] arr)
+        public static Boolean CheckAllBalls(int to, int[] arr)
         {
             Boolean bOK = true;
             foreach (int number in arr)  // value is the numbers array being set through the object
@@ -58,7 +58,7 @@ namespace LotteryApp.Models
             return notDuplicate;
         }
 
-        public static int[] generateRandomBalls(int to, int[] arr)
+        public static int[] GenerateRandomBalls(int to, int[] arr)
         {
             Random rand = new Random();
             int randNo;
@@ -75,4 +75,3 @@ namespace LotteryApp.Models
 
     }
 }
-

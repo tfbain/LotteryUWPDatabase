@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LotteryApp.Models
 {
-    public class LottoT : Ticket
+    public class Lotto : Ticket
     {
         private int _bonusBall;  // backing variable for BonusBall property
         public int BonusBall    // property with logic applied, adhering to encapsulation
@@ -19,7 +19,7 @@ namespace LotteryApp.Models
                 {
                     throw new ArgumentException("The bonus ball must be between 1 and 49");
                 }
-                else if (!validateBonus(value))
+                else if (!ValidateBonus(value))
                 {
                     throw new ArgumentException("The bonus ball must not match any of the Lottery Numbers");
                 }
@@ -29,26 +29,26 @@ namespace LotteryApp.Models
                 }
             }
         }
-        public string retailerCode { get; set; }
+        public string RetailerCode { get; set; }
 
-        public LottoT() : base()
+        public Lotto() : base()
         {
-            _bonusBall = generateBonusBall();
+            _bonusBall = GenerateBonusBall();
         }
 
-        public int generateBonusBall()
+        public int GenerateBonusBall()
         {
             Random rand = new Random();
             int randNo = 0;
             do
             {
                 randNo = rand.Next(1, 49) + 1;
-            } while (!validateBonus(randNo));
+            } while (!ValidateBonus(randNo));
 
             return randNo;
         }
 
-        public Boolean validateBonus(int Bonus)
+        public Boolean ValidateBonus(int Bonus)
         {
             Boolean bOK = true;
             int index = Array.IndexOf(Numbers, Bonus);
@@ -74,4 +74,3 @@ namespace LotteryApp.Models
         }
     }
 }
-

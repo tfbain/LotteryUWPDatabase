@@ -20,7 +20,7 @@ namespace UnitTestTickets
             string expected = todaysDate.ToString("MMMM dd");  // set up todays date in format MMMM dd
 
             //act
-            LottoT lotTicket = new LottoT();    // create new lottery ticket, this should show todays date
+            Lotto lotTicket = new Lotto();    // create new lottery ticket, this should show todays date
             string response = lotTicket.DateOfPurchase.ToString("MMMM dd");  // receive date in format MMMM dd
 
             //assert
@@ -32,7 +32,7 @@ namespace UnitTestTickets
         public void TestAllCorrectBallNumbers() 
         {
             //arrange
-            LottoT lotTicket = new LottoT();
+            Lotto lotTicket = new Lotto();
             int[] testNumbers = { 17, 18, 14, 1, 49, 5 };
 
             //act
@@ -48,7 +48,7 @@ namespace UnitTestTickets
         public void TestAllWithInvalidBalls()  // add data testing to allow for extreme testing.
         {
             //arrange
-            LottoT lotTicket = new LottoT();
+            Lotto lotTicket = new Lotto();
             int[] testNumbers = { 17, 18, 14, 1, 50, 5 };
 
             //act
@@ -63,7 +63,7 @@ namespace UnitTestTickets
         {
             //arrange
             // Test the bonus ball throws exception for an invalid entry
-            LottoT lotto = new LottoT();
+            Lotto lotto = new Lotto();
 
             //act
             lotto.BonusBall = 88;
@@ -74,7 +74,7 @@ namespace UnitTestTickets
         {
             //arrange
             // Test the bonus ball throws exception for an invalid entry
-            LottoT lotto = new LottoT();
+            Lotto lotto = new Lotto();
             try
             {
                 //act
@@ -95,7 +95,7 @@ namespace UnitTestTickets
         {
             //arrange
             // Test the bonus ball throws exception for an invalid entry
-            LottoT lotto = new LottoT();
+            Lotto lotto = new Lotto();
             lotto.Numbers = new int[] { 3, 5, 17, 34, 41, 22 };
             //act
             lotto.BonusBall = 17;

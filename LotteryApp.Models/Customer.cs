@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace LotteryApp.Models
 {
-    public class Customer
+    public class Customer : IEquatable<Customer>
     {
-        //public int custID { get; set; }
+        public Guid CustID { get; set; } = Guid.NewGuid();
         public string Name { get; set; }
 
         public string Phone { get; set; }
@@ -30,11 +30,18 @@ namespace LotteryApp.Models
             this.Email = Email;
         }
 
+        public bool Equals(Customer otherCustomer)
+        {
+            return
+                this.Name == otherCustomer.Name &&
+                this.Phone == otherCustomer.Phone &&
+                this.Email == otherCustomer.Email;
+        }
         public override string ToString() // This overrides the standard String ToString() class.
         {
-            return String.Format("Name: {0} \nPhone Number: {1} \nEmail: {2}\n", Name, Phone, Email);
+            return String.Format("Name: {0} \nPhone Number: {1} \nEmail: {2}\n",
+                Name, Phone, Email);
         }
 
     }
 }
-

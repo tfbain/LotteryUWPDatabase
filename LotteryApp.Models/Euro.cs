@@ -14,11 +14,11 @@ namespace LotteryApp.Models
             get { return _luckyStar; }
             set
             {
-                if (!Utilities.checkAllBalls(49, value))
+                if (!Utilities.CheckAllBalls(49, value))
                 {
                     throw new ArgumentException("The ball numbers must be between 1 and 49");
                 }
-                else if (!validateLucky(value))
+                else if (!ValidateLucky(value))
                 {
                     throw new ArgumentException("The Lucky star numbers cannot match the standard numbers");
                 }
@@ -31,21 +31,21 @@ namespace LotteryApp.Models
         public string Country { get; set; }
         public Euro() : base()
         {
-            _luckyStar = generateLuckyStar();
+            _luckyStar = GenerateLuckyStar();
             Country = "UK";
         }
-        public int[] generateLuckyStar()
+        public int[] GenerateLuckyStar()
         {
             int[] Lucky = new int[2];
             do
             {
-                Lucky = Utilities.generateRandomBalls(49, Lucky);
-            } while (!validateLucky(Lucky));
+                Lucky = Utilities.GenerateRandomBalls(49, Lucky);
+            } while (!ValidateLucky(Lucky));
 
             return Lucky;
         }
 
-        public Boolean validateLucky(int[] lucky)
+        public Boolean ValidateLucky(int[] lucky)
         {
             Boolean bOK = true;
             int index;
@@ -73,5 +73,3 @@ namespace LotteryApp.Models
         }
     }
 }
-
-

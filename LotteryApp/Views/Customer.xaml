@@ -112,7 +112,7 @@
                 </Border.Background>
             </Border>
             <!-- column 0/1 row 0-->
-            <TextBlock Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="40" Text="Customer"/>
+            <TextBlock Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="40" Text="Enter Customer Details" SelectionChanged="TextBlock_SelectionChanged"/>
             <StackPanel x:Name="sp" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <TextBlock Foreground="White" HorizontalAlignment="Center" FontSize="25" Text="Email"/>
                 <TextBox x:Name="txtEmail" HorizontalAlignment="Center" PlaceholderText="Enter Customer Email" FontSize ="20" 
@@ -142,8 +142,8 @@
                          extensions:TextBoxRegex.ValidationMode="Forced"/>
 
                 <StackPanel Grid.Row="4" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="center">
-                    <Button x:Name="btnCreate" Click="OnClick_btnCreate" Foreground="#FF191818" FontSize ="25" Margin="3" Content="Create"/>
-                    <Button x:Name="btnCancel" Click="OnClick_btnCancel" Foreground="#FF191818" FontSize ="25" Margin="3" Content="Cancel"/>
+                    <Button x:Name="btnSave"  Foreground="#FF191818" FontSize ="25" Margin="3" Content="Save" IsEnabled="False"/>
+                    <Button x:Name="btnCancel"  Foreground="#FF191818" FontSize ="25" Margin="3" Content="Cancel"/>
                 </StackPanel>
             </StackPanel>
         </Grid>

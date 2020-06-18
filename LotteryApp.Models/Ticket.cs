@@ -17,7 +17,7 @@ namespace LotteryApp.Models
             get { return _numbers; }
             set
             {
-                if (!Utilities.checkAllBalls(49, value))
+                if (!Utilities.CheckAllBalls(49, value))
                 {
                     throw new ArgumentException("The ball numbers must be between 1 and 49");
                 }
@@ -37,7 +37,7 @@ namespace LotteryApp.Models
             set
             {
                 _dateOfPurchase = value;
-                Day = nextAvailableDraw();
+                Day = NextAvailableDraw();
             }
         } // date of Purchase
 
@@ -47,12 +47,12 @@ namespace LotteryApp.Models
 
             DateOfPurchase = DateTime.Now;
             Customer = new Customer();
-            _numbers = Utilities.generateRandomBalls(49, _numbers);
+            _numbers = Utilities.GenerateRandomBalls(49, _numbers);
         }
 
         public override abstract string ToString(); // This overrides the standard String ToString() class.
 
-        public DayOfWeek nextAvailableDraw()
+        public DayOfWeek NextAvailableDraw()
         {
             TimeSpan timePurchased;
             DayOfWeek nextAvailableDrawDay;
@@ -73,4 +73,3 @@ namespace LotteryApp.Models
 
     }
 }
-

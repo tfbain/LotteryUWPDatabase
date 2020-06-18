@@ -8,12 +8,12 @@ namespace UnitTestTickets
     [TestClass]
     public class TicketTests
     {
-        private LottoT lotTicket;
+        private Lotto lotTicket;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            lotTicket = new LottoT();
+            lotTicket = new Lotto();
         }
 
         [DynamicData(nameof(GetData), DynamicDataSourceType.Method)]
