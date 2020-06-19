@@ -10,7 +10,7 @@ namespace LotteryApp.Repository.Sql
 {
     public class SqlCustomerRepository : ICustomerRepository
     {
-        private LotteryContext _db;
+        private readonly LotteryContext _db;
 
         public SqlCustomerRepository(LotteryContext db)
         {

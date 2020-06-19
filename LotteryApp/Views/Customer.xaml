@@ -112,6 +112,27 @@
                 </Border.Background>
             </Border>
             <!-- column 0/1 row 0-->
+            <CommandBar
+                x:Name="mainCommandBar"
+                HorizontalAlignment="Stretch"
+                IsEnabled="True"
+                Background="AliceBlue">
+                <AppBarButton
+                    Click="{x:Bind CustViewModel.CreateNewCustomerAsync}"
+                    Icon="Add"
+                    Label="New"
+                    ToolTipService.ToolTip="New customer"/>
+                <AppBarButton
+                    Click="{x:Bind CustViewModel.DeleteCustomerAsync}"
+                    Icon="Delete"
+                    Label="Delete"
+                    ToolTipService.ToolTip="Delete customer" />
+                <AppBarButton
+                    Click="{x:Bind CustViewModel.UpdateCustomersAsync}"
+                    Icon="Refresh"
+                    Label="Update"
+                    ToolTipService.ToolTip="Update to server" />
+            </CommandBar>
             <TextBlock Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="40" Text="Enter Customer Details" SelectionChanged="TextBlock_SelectionChanged"/>
             <StackPanel x:Name="sp" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <TextBlock Foreground="White" HorizontalAlignment="Center" FontSize="25" Text="Email"/>

@@ -1,24 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using LotteryApp.Models;
 
 namespace LotteryApp.ViewModels
 {
-    public class CustomerViewModel
+    public class CustomerViewModel : INotifyPropertyChanged
     {
-        public CustomerViewModel(Customer model)
+        public CustomerViewModel(Customer currentCustModel)
         {
-            Model = model ?? new Customer();
+           // if currentCustModel parameter is null create a new customer,
+            // otherwise set CustModel equal to the parameter currentCustModel
+            CustModel = currentCustModel ?? new Customer();
         }
+        
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
+              PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         /// <summary>
         /// The underlying customer model. Internal so it is 
         /// not visible to the RadDataGrid. 
         /// </summary>
-        internal Customer Model { get; set; }
+        internal Customer CustModel { get; set; }
 
         /// <summary>
         /// Gets or sets whether the underlying model has been modified. 
@@ -32,66 +41,79 @@ namespace LotteryApp.ViewModels
         /// <summary>
         /// Gets or sets the customer's first name.
         /// </summary>
-        public string FirstName
+        public string Name
         {
-            get => Model.FirstName;
+            get => CustModel.Name;
             set
             {
-                if (value != Model.FirstName)
+                if (value != CustModel.Name)
                 {
-                    Model.FirstName = value;
+                    CustModel.Name = value;
                     IsModified = true;
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets the customer's last name.
+        /// Gets or sets the customer's email.
         /// </summary>
-        public string LastName
+        public string Email
         {
-            get => Model.LastName;
+            get => CustModel.Email;
             set
             {
-                if (value != Model.LastName)
+                if (value != CustModel.Email)
                 {
-                    Model.LastName = value;
+                    CustModel.Email = value;
                     IsModified = true;
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets the customer's address.
+        /// Gets or sets the customer's phone.
         /// </summary>
-        public string Address
+        public string Phone
         {
-            get => Model.Address;
+            get => CustModel.Phone;
             set
             {
-                if (value != Model.Address)
+                if (value != CustModel.Phone)
                 {
-                    Model.Address = value;
+                    CustModel.Phone = value;
                     IsModified = true;
                 }
             }
         }
 
-        /// <summary>
-        /// Gets or sets the customer's company.
-        /// </summary>
-        public string Company
+        public async Task CreateNewCustomerAsync()
         {
-            get => Model.Company;
-            set
+            //creates a new blank customer
+            await App.Repository.Customers.UpsertAsync(CustModel);
+            //AddingNewCustomer = true;
+        }
+        public async Task UpdateCustomersAsync()
+        {
+            //update the Repository Customers dbSet with the modified Customer information.
+                await App.Repository.Customers.UpsertAsync(CustModel);
+            //
+        }
+        public async Task DeleteCustomerAsync()
+        {
+            if (CustModel != null)
             {
-                if (value != Model.Company)
-                {
-                    Model.Company = value;
-                    IsModified = true;
-                }
+                await App.Repository.Customers.DeleteAsync(CustModel.CustID);
+                //AddingNewCustomer = false;
             }
         }
+
+        public async Task SaveInitialChangesAsync()
+        {
+            await App.Repository.Customers.UpsertAsync(CustModel);
+            await UpdateCustomersAsync();
+            //AddingNewCustomer = false;
+        }
+
     }
 
 
