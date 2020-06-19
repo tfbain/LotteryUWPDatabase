@@ -138,7 +138,8 @@
                 <TextBlock Foreground="White" HorizontalAlignment="Center" FontSize="25" Text="Email"/>
                 <TextBox x:Name="txtEmail" HorizontalAlignment="Center" PlaceholderText="Enter Customer Email" FontSize ="20" 
                      Width="{Binding ElementName=InnerGrid, Path=Width}"
-                     Margin="10"
+                      Text="{x:Bind CustViewModel.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      Margin="10"
                      Foreground="DarkSlateGray" TextWrapping="Wrap" Background="White" BorderBrush="White" 
                      extensions:TextBoxRegex.ValidationType="Email"
                      extensions:TextBoxRegex.ValidationMode="Forced"   />
@@ -148,6 +149,7 @@
                 <TextBlock Foreground="White" HorizontalAlignment="Center" FontSize="25" Text="Name"/>
                 <TextBox x:Name="txtName" HorizontalAlignment="center" PlaceholderText="Enter Customer Name" FontSize ="20" 
                          Width="{Binding ElementName=InnerGrid, Path=Width}"
+                         Text="{x:Bind CustViewModel.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          Margin="10" 
                          Foreground="DarkSlateGray" TextWrapping="Wrap" Background="white" BorderBrush="White"
                          extensions:TextBoxRegex.Regex="^[a-zA-Z ]*$"
@@ -157,6 +159,7 @@
                 <TextBlock Foreground="White" HorizontalAlignment="Center" FontSize="25" Text="Phone"/>
                 <TextBox x:Name="txtPhone" HorizontalAlignment="Center" PlaceholderText="Enter Customer Phone" FontSize ="20" 
                           Width="{Binding ElementName=InnerGrid, Path=Width}"
+                         Text="{x:Bind CustViewModel.Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          Margin="10"
                      Foreground="DarkSlateGray" TextWrapping="Wrap" Background="white" BorderBrush="White" 
                          extensions:TextBoxRegex.ValidationType="PhoneNumber"
