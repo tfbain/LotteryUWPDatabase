@@ -18,7 +18,7 @@ namespace UnitTestTickets
             Customer testCust = new Customer(name, phone, email);
             string expected = name;
             //act
-            string response = testCust.Name;
+            string response = testCust.CustName;
 
             //assert
             Assert.AreEqual(expected, response);

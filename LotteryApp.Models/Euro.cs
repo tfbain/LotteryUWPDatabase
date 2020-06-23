@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -61,7 +62,7 @@ namespace LotteryApp.Models
             string message;
             StringBuilder sb = new StringBuilder();
 
-            sb.Append(Customer.Name);
+            sb.Append(Customer.CustName);
             sb.Append(Customer.Email);
             sb.Append(Day);
             sb.Append(Numbers[1]);

@@ -43,12 +43,12 @@ namespace LotteryApp.ViewModels
         /// </summary>
         public string Name
         {
-            get => CustModel.Name;
+            get => CustModel.CustName;
             set
             {
-                if (value != CustModel.Name)
+                if (value != CustModel.CustName)
                 {
-                    CustModel.Name = value;
+                    CustModel.CustName = value;
                     IsModified = true;
                 }
             }

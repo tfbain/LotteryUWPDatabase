@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,8 +9,9 @@ namespace LotteryApp.Models
 {
     public class Customer : IEquatable<Customer>
     {
+        [Key]
         public Guid CustID { get; set; } = Guid.NewGuid();
-        public string Name { get; set; }
+        public string CustName { get; set; }
 
         public string Phone { get; set; }
 
@@ -19,13 +21,13 @@ namespace LotteryApp.Models
         //public Customer(int customerId) => custID = customerId;
         public Customer()
         {
-            this.Name = "";
+            this.CustName = "";
             this.Phone = "";
             this.Email = "";
         }
         public Customer(string Name, string Phone, string Email)
         {
-            this.Name = Name;
+            this.CustName = Name;
             this.Phone = Phone;
             this.Email = Email;
         }
@@ -33,14 +35,14 @@ namespace LotteryApp.Models
         public bool Equals(Customer otherCustomer)
         {
             return
-                this.Name == otherCustomer.Name &&
+                this.CustName == otherCustomer.CustName &&
                 this.Phone == otherCustomer.Phone &&
                 this.Email == otherCustomer.Email;
         }
         public override string ToString() // This overrides the standard String ToString() class.
         {
             return String.Format("Name: {0} \nPhone Number: {1} \nEmail: {2}\n",
-                Name, Phone, Email);
+                CustName, Phone, Email);
         }
 
     }

@@ -46,12 +46,12 @@ namespace LotteryApp.Repository.Sql
             return await _db.Customers
                 .Where(x =>
                     parameters.Any(y =>
-                        x.Name.StartsWith(y) ||
+                        x.CustName.StartsWith(y) ||
                         x.Email.StartsWith(y) ||
                         x.Phone.StartsWith(y) ))
                 .OrderByDescending(x =>
                     parameters.Count(y =>
-                        x.Name.StartsWith(y) ||
+                        x.CustName.StartsWith(y) ||
                         x.Email.StartsWith(y) ||
                         x.Phone.StartsWith(y) ))
                  .AsNoTracking()

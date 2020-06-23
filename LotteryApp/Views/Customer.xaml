@@ -133,7 +133,7 @@
                     Label="Update"
                     ToolTipService.ToolTip="Update to server" />
             </CommandBar>
-            <TextBlock Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="40" Text="Enter Customer Details" SelectionChanged="TextBlock_SelectionChanged"/>
+            <TextBlock Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="40" Text="Enter Customer Details" />
             <StackPanel x:Name="sp" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <TextBlock Foreground="White" HorizontalAlignment="Center" FontSize="25" Text="Email"/>
                 <TextBox x:Name="txtEmail" HorizontalAlignment="Center" PlaceholderText="Enter Customer Email" FontSize ="20" 

@@ -1,12 +1,12 @@
 CREATE TABLE customer
 (
-custID INTEGER PRIMARY KEY NOT NULL,
+custID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 email TEXT not null,
-custName TEXT not null,
+name TEXT not null,
 phone TEXT
 );
 CREATE TABLE ticket(
-ticketID INTEGER PRIMARY KEY NOT NULL,
+ticketID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 ticketType TEXT not null,
 custID INTEGER not null,
 ballNumbers blob,
@@ -17,18 +17,18 @@ CREATE TABLE lotto(
 ticketID INTEGER,
 bonusBall INTEGER,
 retailerCode TEXT,
-FOREIGN KEY (ticketID) REFERENCES ticket(ticketID));
+FOREIGN KEY (ticketID) REFERENCES lotto (ticketID));
 
 CREATE TABLE euro(
 ticketID INTEGER,
 luckyStar BLOB,
 country TEXT,
-FOREIGN KEY (ticketID) REFERENCES ticket(ticketID));
+FOREIGN KEY (ticketID) REFERENCES lotto (ticketID));
 
 /* customer inserts */
-INSERT INTO CUSTOMER(custID, email, custName, phone) 
+INSERT INTO CUSTOMER(custID, email, name, phone) 
 VALUES (1, 'g.starr@basil.com', 'Garry starr', '0131 345678');
-INSERT INTO CUSTOMER(custID, email, custName, phone) 
+INSERT INTO CUSTOMER(custID, email, name, phone) 
 VALUES (2, 'i.zwierko@yahoo.com', 'Ilona Zwierko', '0131 345678');
 
 INSERT INTO ticket(ticketID, ticketType, custID, ballNumbers)

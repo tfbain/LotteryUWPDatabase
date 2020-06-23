@@ -18,8 +18,7 @@ using LotteryApp.Repository;
 using LotteryApp.Repository.Sql;
 using Windows.Storage;
 using Microsoft.EntityFrameworkCore;
-
-
+using Microsoft.Data.Sqlite;
 
 namespace LotteryApp
 {
@@ -111,15 +110,35 @@ namespace LotteryApp
 
         public static void SqliteDatabase()
         {
-            string demoDatabasePath = Package.Current.InstalledLocation.Path + @"\Assets\Repository.db";
-            string databasePath = ApplicationData.Current.LocalFolder.Path + @"\CustomerDatabaseRepository.db";
+            string demoDatabasePath = Package.Current.InstalledLocation.Path + @"\Assets\LotteryDbRepository.db";
+            string databasePath = ApplicationData.Current.LocalFolder.Path + @"\LotteryDbRepository.db";
             if (!File.Exists(databasePath))
             {
                 File.Copy(demoDatabasePath, databasePath);
             }
             var dbOptions = new DbContextOptionsBuilder<LotteryContext>().UseSqlite("Data Source=" + databasePath);
             Repository = new SqlLotteryRepository(dbOptions);
+
+            //string databasePath = ApplicationData.Current.LocalFolder.Path + @"\LotteryDbRepository.db";
+            //if (!File.Exists(databasePath))
+            // {
+            //create database tables
+            //    using(SqliteConnection db = new SqliteConnection($"Filename={databasePath}"))
+            //     {
+            //         db.Open();
+            //       SqliteCommand CreateTables = new SqliteCommand(System.IO.File.ReadAllText(@"Assets/LotterysqliteCreate.sql"), db);
+            //      }
+            //create database tables
+            //    using (SqliteConnection db = new SqliteConnection($"Filename={databasePath}"))
+            //   {
+            //        db.Open();
+            //       SqliteCommand InsertData = new SqliteCommand(System.IO.File.ReadAllText(@"Assets/LotterysqliteInsert.sql"), db);
+            //       InsertData.ExecuteReader();
+            //   }
+            //}
+            // var dbOptions = new DbContextOptionsBuilder<LotteryContext>().UseSqlite("Data Source=" + databasePath);
+            //Repository = new SqlLotteryRepository(dbOptions);
         }
     }
-
 }
+
