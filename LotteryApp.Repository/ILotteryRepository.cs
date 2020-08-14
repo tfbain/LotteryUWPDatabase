@@ -8,8 +8,8 @@ namespace LotteryApp.Repository
 {
     public interface ILotteryRepository
     {
+        //ICustomerRepository customer { get; }
         ICustomerRepository Customers { get; }
-
         // Add for each of the entities to interact with the backend database.
     }
 }

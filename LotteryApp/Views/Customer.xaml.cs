@@ -37,7 +37,7 @@ namespace LotteryApp.Pages
         // would be sent to the CustomerViewModel, for now this is a new instance
         // Data can be added in the customer.xaml.
         public CustomerViewModel CustViewModel { get; set; } =
-            new CustomerViewModel(new Models.Customer());
+            new CustomerViewModel(new Models.Customer());  
     }
 
 }

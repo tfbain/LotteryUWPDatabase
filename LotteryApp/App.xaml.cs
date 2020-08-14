@@ -110,30 +110,58 @@ namespace LotteryApp
 
         public static void SqliteDatabase()
         {
-            string demoDatabasePath = Package.Current.InstalledLocation.Path + @"\Assets\LotteryDbRepository.db";
-            string databasePath = ApplicationData.Current.LocalFolder.Path + @"\LotteryDbRepository.db";
+            string demoDatabasePath = Package.Current.InstalledLocation.Path + @"\Assets\LottoDbRepository.db";
+            string databasePath = ApplicationData.Current.LocalFolder.Path + @"\LottoDbRepository.db";
             if (!File.Exists(databasePath))
             {
-                File.Copy(demoDatabasePath, databasePath);
+                try
+                {
+                    File.Copy(demoDatabasePath, databasePath);
+                }
+                catch(System.IO.FileNotFoundException ex)
+                {
+                    System.ArgumentException argEx = new System.ArgumentException("LottoDbRepository not found in assets folder", "copy sqlite file", ex);
+                    throw argEx;
+
+                }
             }
             var dbOptions = new DbContextOptionsBuilder<LotteryContext>().UseSqlite("Data Source=" + databasePath);
             Repository = new SqlLotteryRepository(dbOptions);
 
-            //string databasePath = ApplicationData.Current.LocalFolder.Path + @"\LotteryDbRepository.db";
+            // ****  THE FOLLOWING CODE WOULD REPLACE THE ABOVE CODE TO CREATE AN INITIAL INSTANCE OF THE DATABASE ****
+            //string databasePath = ApplicationData.Current.LocalFolder.Path + @"\LottoDbRepository.db";
+
             //if (!File.Exists(databasePath))
             // {
-            //create database tables
+            ////create database tables
             //    using(SqliteConnection db = new SqliteConnection($"Filename={databasePath}"))
             //     {
-            //         db.Open();
-            //       SqliteCommand CreateTables = new SqliteCommand(System.IO.File.ReadAllText(@"Assets/LotterysqliteCreate.sql"), db);
+            //        try
+            //        {
+            //            db.Open();
+            //            SqliteCommand CreateTables = new SqliteCommand(System.IO.File.ReadAllText(@"Assets/LotterysqliteCreate.sql"), db);
+            //            //CreateTables.ExecuteReader();
+            //            db.Close();
+            //        }
+            //        catch(Exception)
+            //        {
+            //            throw new Exception("Error creating database tables");
+            //        }
             //      }
-            //create database tables
+            ////insert data into database tables
             //    using (SqliteConnection db = new SqliteConnection($"Filename={databasePath}"))
             //   {
-            //        db.Open();
-            //       SqliteCommand InsertData = new SqliteCommand(System.IO.File.ReadAllText(@"Assets/LotterysqliteInsert.sql"), db);
-            //       InsertData.ExecuteReader();
+            //        try
+            //        {
+            //            db.Open();
+            //            SqliteCommand InsertData = new SqliteCommand(System.IO.File.ReadAllText(@"Assets/LotterysqliteInsert.sql"), db);
+            //            InsertData.ExecuteReader();
+            //            db.Close();
+            //        }
+            //        catch(Exception)
+            //        {
+            //            throw new Exception("Error inserting data to database tables");
+            //        }
             //   }
             //}
             // var dbOptions = new DbContextOptionsBuilder<LotteryContext>().UseSqlite("Data Source=" + databasePath);

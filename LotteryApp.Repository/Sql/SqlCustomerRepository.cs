@@ -33,7 +33,7 @@ namespace LotteryApp.Repository.Sql
         /// </summary>
         public async Task<Customer> GetAsync(Guid id)
         {
-            return await _db.Customers
+            return await _db.Customers     //  Customers is the database Entity
                 .AsNoTracking()                 // this is read only so disables change tracking, i.e. checking if data updated
                 .FirstOrDefaultAsync(x => x.CustID == id);   // searches for a customer with the specific ID and returns if exists ?????
         }

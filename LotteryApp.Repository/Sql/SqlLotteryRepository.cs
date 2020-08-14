@@ -10,7 +10,7 @@ namespace LotteryApp.Repository.Sql
 {
     public class SqlLotteryRepository : ILotteryRepository
     {
-          private DbContextOptions<LotteryContext> _dbOptions;
+          private readonly DbContextOptions<LotteryContext> _dbOptions;
 
         public SqlLotteryRepository(DbContextOptionsBuilder<LotteryContext> dbOptionsBuilder)
         {
@@ -21,8 +21,8 @@ namespace LotteryApp.Repository.Sql
             }
         }
 
+        //public ICustomerRepository customer => new SqlCustomerRepository(new LotteryContext(_dbOptions));
         public ICustomerRepository Customers => new SqlCustomerRepository(new LotteryContext(_dbOptions));
-
         //  Add for each entity required to be interacting with database
     }
 }
