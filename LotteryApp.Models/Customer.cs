@@ -27,7 +27,7 @@ namespace LotteryApp.Models
         }
         public Customer(string Name, string Phone, string Email)
         {
-            this.CustName = Name;
+            CustName = Name;
             this.Phone = Phone;
             this.Email = Email;
         }

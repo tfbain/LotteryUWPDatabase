@@ -1,28 +1,28 @@
 CREATE TABLE Customers
 (
-custID INTEGER PRIMARY KEY NOT NULL,
-email TEXT not null,
-custName TEXT not null,
-phone TEXT
+CustID INTEGER PRIMARY KEY NOT NULL,
+Email TEXT not null,
+CustName TEXT not null,
+Phone TEXT
 );
 CREATE TABLE Tickets(
-ticketID INTEGER PRIMARY KEY NOT NULL,
-ticketType TEXT not null,
-custID INTEGER not null,
-ballNumbers blob,
-FOREIGN KEY (custID) REFERENCES Customers (custID)
+TicketID INTEGER PRIMARY KEY NOT NULL,
+TicketType TEXT not null,
+CustID INTEGER not null,
+BallNumbers blob,
+FOREIGN KEY (CustID) REFERENCES Customers (CustID)
 ); 
 
 CREATE TABLE Lottos(
-ticketID INTEGER PRIMARY KEY NOT NULL,
-bonusBall INTEGER,
-retailerCode TEXT,
-FOREIGN KEY (ticketID) REFERENCES Tickets (ticketID));
+TicketID INTEGER PRIMARY KEY NOT NULL,
+BonusBall INTEGER,
+RetailerCode TEXT,
+FOREIGN KEY (TicketID) REFERENCES Tickets (TicketID));
 
 CREATE TABLE Euros(
-ticketID INTEGER PRIMARY KEY NOT NULL,
-luckyStar BLOB,
-country TEXT,
-FOREIGN KEY (ticketID) REFERENCES Tickets (ticketID));
+TicketID INTEGER PRIMARY KEY NOT NULL,
+LuckyStar BLOB,
+Country TEXT,
+FOREIGN KEY (TicketID) REFERENCES Tickets (TicketID));
 
 	   
