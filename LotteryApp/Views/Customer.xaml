@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="LotteryApp.Pages.Customer"
+    x:Class="LotteryApp.Pages.CustomerPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:LotteryApp.Pages"
@@ -149,7 +149,7 @@
                 <TextBlock Foreground="White" HorizontalAlignment="Center" FontSize="25" Text="Name"/>
                 <TextBox x:Name="txtName" HorizontalAlignment="center" PlaceholderText="Enter Customer Name" FontSize ="20" 
                          Width="{Binding ElementName=InnerGrid, Path=Width}"
-                         Text="{x:Bind CustViewModel.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         Text="{x:Bind CustViewModel.CustName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          Margin="10" 
                          Foreground="DarkSlateGray" TextWrapping="Wrap" Background="white" BorderBrush="White"
                          extensions:TextBoxRegex.Regex="^[a-zA-Z ]*$"

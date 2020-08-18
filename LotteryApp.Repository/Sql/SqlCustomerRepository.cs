@@ -24,7 +24,7 @@ namespace LotteryApp.Repository.Sql
         /// </summary>
         public async Task<IEnumerable<Customer>> GetAsync()
         {
-            return await _db.Customers
+            return await _db.Customers  // this is entity
                 .AsNoTracking()  // this is read only so disables change tracking, i.e. checking if data updated
                 .ToListAsync();  // creates a list from the queriable db customers
         }
@@ -37,8 +37,19 @@ namespace LotteryApp.Repository.Sql
                 .AsNoTracking()                 // this is read only so disables change tracking, i.e. checking if data updated
                 .FirstOrDefaultAsync(x => x.CustID == id);   // searches for a customer with the specific ID and returns if exists ?????
         }
+
         /// <summary>
-        /// Returns all customers with a data field matching the start of the given string. 
+        /// Returns the customer with the given Email.  RETURNS a Customer object 
+        /// </summary>
+        public async Task<Customer> GetEmailAsync(string email)
+        {
+            return await _db.Customers     //  Customers is the database Entity
+                .AsNoTracking()                 // this is read only so disables change tracking, i.e. checking if data updated
+                .FirstOrDefaultAsync(x => x.Email == email);   // searches for a customer with the specific email and returns if exists.
+        }
+
+        /// <summary>
+        /// Returns all customers with a data field matching the start of the given string. RETURNS A LIST 
         /// </summary>
         public async Task<IEnumerable<Customer>> GetAsync(string value)
         {

@@ -39,7 +39,7 @@ namespace LotteryApp
         private readonly List<(string Tag, Type Page)> _pages = new List<(string Tag, Type Page)>
         {
             //("home", typeof(HomePage)),
-            ("cust", typeof(Customer)),
+            ("cust", typeof(CustomerPage)),
             ("lotto", typeof(Lotto)),
             ("euro", typeof(Euro)),
         };

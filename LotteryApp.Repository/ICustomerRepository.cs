@@ -28,6 +28,11 @@ namespace LotteryApp.Repository
         Task<Customer> GetAsync(Guid id);
 
         /// <summary>
+        /// Returns the customer with the given email. 
+        /// </summary>
+        Task<Customer> GetEmailAsync(string email);
+
+        /// <summary>
         /// Adds a new customer if the customer does not exist, updates the 
         /// existing customer otherwise.
         /// </summary>

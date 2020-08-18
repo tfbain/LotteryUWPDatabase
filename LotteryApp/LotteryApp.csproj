@@ -146,8 +146,10 @@
   <ItemGroup>
     <Content Include="Assets\custIcon.jfif" />
     <Content Include="Assets\EuroIcon.png" />
-    <Content Include="Assets\LotterysqliteInsert.sql" />
     <Content Include="Assets\LotterysqliteCreate.sql" />
+    <Content Include="Assets\LotterysqliteInsert.sql" />
+    <Content Include="Assets\OLDLotterysqliteInsert.sql" />
+    <Content Include="Assets\OLDLotterysqliteCreate.sql" />
     <Content Include="Images\lottoBalls.jpg" />
     <Content Include="Images\lottoBallsL.jpg" />
     <Content Include="Properties\Default.rd.xml" />
@@ -220,6 +222,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\LottoAppDbRepository.db" />
+    <None Include="Assets\OLDLottoAppDbRepository.db" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

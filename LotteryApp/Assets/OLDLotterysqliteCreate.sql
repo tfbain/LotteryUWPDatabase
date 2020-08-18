@@ -1,6 +1,6 @@
 CREATE TABLE Customers
 (
-CustID BLOB PRIMARY KEY NOT NULL,
+CustID INTEGER PRIMARY KEY NOT NULL,
 Email TEXT not null,
 CustName TEXT not null,
 Phone TEXT
@@ -8,8 +8,8 @@ Phone TEXT
 CREATE TABLE Tickets(
 TicketID INTEGER PRIMARY KEY NOT NULL,
 TicketType TEXT not null,
-CustID BLOB not null,
-BallNumbers BLOB,
+CustID INTEGER not null,
+BallNumbers blob,
 FOREIGN KEY (CustID) REFERENCES Customers (CustID)
 ); 
 

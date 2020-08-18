@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using LotteryApp.Models;
+using Microsoft.Toolkit.Uwp.Helpers;
 
 namespace LotteryApp.ViewModels
 {
@@ -15,21 +17,37 @@ namespace LotteryApp.ViewModels
         {
             // if currentCustModel parameter is null create a new customer,
             // otherwise set CustModel equal to the parameter currentCustModel
-            CustModel = currentCustModel ?? new Customer();  
-            Task.Run(GetCustomerAsync); //TB added
+            CustModel = currentCustModel ?? new Customer();    //TB***** removed
+            Task.Run(GetCustomerListAsync);
+            //Task.Run(GetCustomerAsync); //TB added
            
         }
+
+        private ObservableCollection<CustomerViewModel> _customersVdb = new ObservableCollection<CustomerViewModel>();  // TB ADDED
+        public ObservableCollection<CustomerViewModel> CustomersVdb { get => _customersVdb; }  //  TB ADDED
         
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
               PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        internal Customer CustModel { get; set; }
 
         /// <summary>
         /// The underlying customer model. Internal so it is 
         /// not visible to the RadDataGrid. 
         /// </summary>
-        internal Customer CustModel { get; set; }
+        private CustomerViewModel _selectedCust;
+        public CustomerViewModel SelectedCust
+        {
+            get => _selectedCust;
+            set
+            {
+                if (_selectedCust != value)
+                {
+                    _selectedCust = value;
+                }
+            }
+        }
 
         /// <summary>
         /// Gets or sets whether the underlying model has been modified. 
@@ -43,7 +61,7 @@ namespace LotteryApp.ViewModels
         /// <summary>
         /// Gets or sets the customer's first name.
         /// </summary>
-        public string Name
+        public string CustName
         {
             get => CustModel.CustName;
             set
@@ -92,34 +110,60 @@ namespace LotteryApp.ViewModels
         {
             string email = "g.starr@basil.com";
             // CustModel object of type Customer, customer is the database entity name, convention should be to name it Customers.
-           CustModel = (Customer)await App.Repository.Customers.GetAsync(email);
+            //CustModel = (Customer)await App.Repository.Customers.GetEmailAsync(email);
+            //IEnumerable<Customer> custemails = await App.Repository.Customers.GetAsync("g");
+
+            CustModel = (Customer)await App.Repository.CustomersR.GetEmailAsync(email);
+
+            
         }
         public async Task CreateNewCustomerAsync()
         {
             //creates a new blank customer
-            await App.Repository.Customers.UpsertAsync(CustModel);
+            await App.Repository.CustomersR.UpsertAsync(CustModel);
             //AddingNewCustomer = true;
         }
         public async Task UpdateCustomersAsync()
         {
             //update the Repository Customers dbSet with the modified Customer information.
-                await App.Repository.Customers.UpsertAsync(CustModel);
+                await App.Repository.CustomersR.UpsertAsync(CustModel);
             //
         }
         public async Task DeleteCustomerAsync()
         {
             if (CustModel != null)
             {
-                await App.Repository.Customers.DeleteAsync(CustModel.CustID);
+                await App.Repository.CustomersR.DeleteAsync(CustModel.CustID);
                 //AddingNewCustomer = false;
             }
         }
 
         public async Task SaveInitialChangesAsync()
         {
-            await App.Repository.Customers.UpsertAsync(CustModel);
+            await App.Repository.CustomersR.UpsertAsync(CustModel);
             await UpdateCustomersAsync();
             //AddingNewCustomer = false;
+        }
+        // TB ADDED 
+        public async Task GetCustomerListAsync()
+        {
+            //App is application, Repository is database object created in application,
+            // Customers is the entity within the sqlite database.
+            // Reads the full Customers entity and puts it into an object customer
+            //  
+            var customers = await App.Repository.CustomersR.GetAsync();  //  CustomersR ***** should be populated with customer view models ****.
+            if (customers == null)
+            {
+                return;
+            }
+            await DispatcherHelper.ExecuteOnUIThreadAsync(() =>
+            {
+                CustomersVdb.Clear();
+                foreach (var c in customers)
+                {
+                    CustomersVdb.Add(new CustomerViewModel(c));
+                }
+            });
         }
 
     }
