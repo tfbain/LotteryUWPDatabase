@@ -26,23 +26,33 @@ namespace LotteryApp.ViewModels
 
         public void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
               PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        internal Customer CustModel { get; set; }
+        //internal Customer CustModel { get; set; }
 
         /// <summary>
         /// The underlying customer model. Internal so it is 
         /// not visible to the RadDataGrid. 
         /// </summary>
-        private CustomerViewModel _selectedCust;
-        public CustomerViewModel SelectedCust
+        private Customer _custModel;
+        public Customer CustModel
         {
-            get => _selectedCust;
+            get => _custModel;
             set
             {
-                if (_selectedCust != value)
+                if (_custModel != value)
                 {
-                    _selectedCust = value;
+                    _custModel = value;
+                    if (!IsModified)
+                    {
+                        Task.Run(RefreshCustomer);   // added 2408 cancel changes
+
+                        OnPropertyChanged(string.Empty);// added 2408 cancel changes
+                    }
                 }
             }
+        }
+        public async Task RefreshCustomer()  // added 2408 cancel changes
+        {
+            CustModel = await App.Repository.CustomersR.GetAsync(CustModel.CustID);
         }
 
         /// <summary>
@@ -106,8 +116,11 @@ namespace LotteryApp.ViewModels
         public async Task UpdateCustomersAsync()
         {
             //update the Repository Customers dbSet with the modified Customer information.
+            if (IsModified == true)
+            {
                 await App.Repository.CustomersR.UpsertAsync(CustModel);
-            //
+            }
+            
         }
 
 
