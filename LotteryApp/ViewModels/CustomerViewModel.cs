@@ -123,34 +123,7 @@ namespace LotteryApp.ViewModels
             
         }
 
-
-        public async Task SaveInitialChangesAsync()
-        {
-            await App.Repository.CustomersR.UpsertAsync(CustModel);
-            await UpdateCustomersAsync();
-            //AddingNewCustomer = false;
-        }
-        //// TB ADDED 
-        //public async Task GetCustomerListAsync()
-        //{
-        //    //App is application, Repository is database object created in application,
-        //    // Customers is the entity within the sqlite database.
-        //    // Reads the full Customers entity and puts it into an object customer
-        //    //  
-        //    var customers = await App.Repository.CustomersR.GetAsync();  //  CustomersR ***** should be populated with customer view models ****.
-        //    if (customers == null)
-        //    {
-        //        return;
-        //    }
-        //    await DispatcherHelper.ExecuteOnUIThreadAsync(() =>
-        //    {
-        //        CustomersVdb.Clear();
-        //        foreach (var c in customers)
-        //        {
-        //            CustomersVdb.Add(new CustomerViewModel(c));
-        //        }
-        //    });
-        //}
+       
 
     }
 
