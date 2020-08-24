@@ -129,7 +129,7 @@ namespace LotteryApp
             Repository = new SqlLotteryRepository(dbOptions);
 
             // ****  THE FOLLOWING CODE WOULD REPLACE THE ABOVE CODE TO CREATE AN INITIAL INSTANCE OF THE DATABASE ****
-            //string databasePath = ApplicationData.Current.LocalFolder.Path + @"\LottoAppDbRepository.db";
+            //string databasePath = ApplicationData.Current.LocalFolder.Path + @"\fffLottoAppDbRepository.db";
 
             //if (!File.Exists(databasePath))
             //{

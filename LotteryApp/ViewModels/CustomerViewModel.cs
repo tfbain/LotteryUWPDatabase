@@ -18,8 +18,8 @@ namespace LotteryApp.ViewModels
             // if currentCustModel parameter is null create a new customer,
             // otherwise set CustModel equal to the parameter currentCustModel
             CustModel = currentCustModel ?? new Customer();    //TB***** removed
-            Task.Run(GetCustomerListAsync);
-            //Task.Run(GetCustomerAsync); //TB added
+            //Task.Run(GetCustomerListAsync);
+            Task.Run(GetCustomerAsync); //TB added to emulate logged in customer.
            
         }
 
@@ -109,7 +109,7 @@ namespace LotteryApp.ViewModels
         public async Task GetCustomerAsync()             //TB  added this  method
         {
             string email = "g.starr@basil.com";
-            // CustModel object of type Customer, customer is the database entity name, convention should be to name it Customers.
+            // CustModel object of type Customer, Customers is the database entity name.
             //CustModel = (Customer)await App.Repository.Customers.GetEmailAsync(email);
             //IEnumerable<Customer> custemails = await App.Repository.Customers.GetAsync("g");
 
