@@ -118,16 +118,6 @@
                 IsEnabled="True"
                 Background="AliceBlue">
                 <AppBarButton
-                    Click="{x:Bind CustViewModel.CreateNewCustomerAsync}"
-                    Icon="Add"
-                    Label="New"
-                    ToolTipService.ToolTip="New customer"/>
-                <AppBarButton
-                    Click="{x:Bind CustViewModel.DeleteCustomerAsync}"
-                    Icon="Delete"
-                    Label="Delete"
-                    ToolTipService.ToolTip="Delete customer" />
-                <AppBarButton
                     Click="{x:Bind CustViewModel.UpdateCustomersAsync}"
                     Icon="Refresh"
                     Label="Update"
@@ -161,9 +151,9 @@
                           Width="{Binding ElementName=InnerGrid, Path=Width}"
                          Text="{x:Bind CustViewModel.Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          Margin="10"
-                     Foreground="DarkSlateGray" TextWrapping="Wrap" Background="white" BorderBrush="White" 
-                         extensions:TextBoxRegex.ValidationType="PhoneNumber"
-                         extensions:TextBoxRegex.ValidationMode="Forced"/>
+                     Foreground="DarkSlateGray" TextWrapping="Wrap" Background="white" BorderBrush="White" />
+             <!--   extensions:TextBoxRegex.ValidationType="PhoneNumber"
+                         extensions:TextBoxRegex.ValidationMode="Forced"/>-->
 
                 <StackPanel Grid.Row="4" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="center">
                     <Button x:Name="btnSave"  Foreground="#FF191818" FontSize ="25" Margin="3" Content="Save" IsEnabled="False"/>

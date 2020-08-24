@@ -38,9 +38,7 @@ namespace LotteryApp.Repository
         /// </summary>
         Task<Customer> UpsertAsync(Customer customer);
 
-        /// <summary>
-        /// Deletes a customer.
-        /// </summary>
-        Task DeleteAsync(Guid customerId);
+ 
+   
     }
 }

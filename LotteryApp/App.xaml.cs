@@ -19,6 +19,8 @@ using LotteryApp.Repository.Sql;
 using Windows.Storage;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.Sqlite;
+using System.Threading.Tasks;
+using LotteryApp.Models;
 
 namespace LotteryApp
 {
@@ -30,6 +32,7 @@ namespace LotteryApp
     {
         // Initialises an instance of the database entities to be manipulated, coded in ItutorialRepository
         public static ILotteryRepository Repository { get; set; }
+        public static  Customer SignedInCust;
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -127,6 +130,8 @@ namespace LotteryApp
             }
             var dbOptions = new DbContextOptionsBuilder<LotteryContext>().UseSqlite("Data Source=" + databasePath);
             Repository = new SqlLotteryRepository(dbOptions);
+            string email = "g.starr@basil.com";   //  this would be replaced with authentication or login
+            Task.Run(()=>GetSignedInAsync(email));
 
             // ****  THE FOLLOWING CODE WOULD REPLACE THE ABOVE CODE TO CREATE AN INITIAL INSTANCE OF THE DATABASE ****
             //string databasePath = ApplicationData.Current.LocalFolder.Path + @"\fffLottoAppDbRepository.db";
@@ -166,6 +171,18 @@ namespace LotteryApp
             //}
             //var dbOptions = new DbContextOptionsBuilder<LotteryContext>().UseSqlite("Data Source=" + databasePath);
             //Repository = new SqlLotteryRepository(dbOptions);
+        }
+
+        public static async Task GetSignedInAsync(string email)             //TB  added this  method, not this would normally be part of authentication
+        {
+            
+            // CustModel object of type Customer, Customers is the database entity name.
+            //CustModel = (Customer)await App.Repository.Customers.GetEmailAsync(email);
+            //IEnumerable<Customer> custemails = await App.Repository.Customers.GetAsync("g");
+
+            SignedInCust = await App.Repository.CustomersR.GetEmailAsync(email);
+
+
         }
     }
 }
