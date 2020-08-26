@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using LotteryApp.ViewModels;
+using LotteryApp.Views;
 
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -45,6 +46,50 @@ namespace LotteryApp.Pages
 
         public CustomerViewModel CustViewModel { get; set; } =
               new CustomerViewModel(App.SignedInCust);   //  note this is set at app.xaml.cs for now to replace logon or authentication
+
+        protected async override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            if (CustViewModel.IsModified)
+            {
+                var saveDialog = new SaveChangesDialog()
+                {
+                    Title = $"Save changes to Invoice # {CustViewModel.Email.ToString()}?",
+                    Message = $"Invoice # {CustViewModel.Email.ToString()} " +
+                        "has unsaved changes that will be lost. Do you want to save your changes?"
+                };
+
+                await saveDialog.ShowAsync();
+                SaveChangesDialogResult result = saveDialog.Result;
+
+                switch (result)
+                {
+                    case SaveChangesDialogResult.Save:
+                        await CustViewModel.UpdateCustomersAsync();
+                        break;
+                    case SaveChangesDialogResult.DontSave:
+                        await CustViewModel.RefreshCustomer();
+                        break;
+                    case SaveChangesDialogResult.Cancel:
+                        if (e.NavigationMode == NavigationMode.Back)
+                        {
+                            Frame.GoForward();
+                        }
+                        else
+                        {
+                            Frame.GoBack();
+                        }
+                        e.Cancel = true;
+
+                        // This flag gets cleared on navigation, so restore it. 
+                        CustViewModel.IsModified = true;
+                        break;
+                }
+            }
+
+            base.OnNavigatingFrom(e);
+        }
+
+
     }
 
 }

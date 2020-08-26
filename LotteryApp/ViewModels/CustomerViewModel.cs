@@ -127,6 +127,7 @@ namespace LotteryApp.ViewModels
             if (IsModified == true)
             {
                 await App.Repository.CustomersR.UpsertAsync(CustModel);
+                IsModified = false;
             }
             
         }
