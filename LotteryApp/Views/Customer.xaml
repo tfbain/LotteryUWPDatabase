@@ -122,6 +122,11 @@
                     Icon="Refresh"
                     Label="Update"
                     ToolTipService.ToolTip="Update to server" />
+                <AppBarButton
+                    Click="{x:Bind CustViewModel.RefreshCustomer}"
+                    Icon="Cancel"
+                    Label="Cancel"
+                    ToolTipService.ToolTip="Cancel changes to Customer" />
             </CommandBar>
             <TextBlock Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="40" Text="Customer Details" />
             <StackPanel x:Name="sp" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">

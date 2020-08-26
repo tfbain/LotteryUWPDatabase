@@ -32,6 +32,7 @@ namespace LotteryApp.Pages
             DataContext = CustViewModel;   // code below links this to CustomerListPageViewModel
         }
 
+        
         // creates an instance of the CustomerViewModel
         // NOTE AT THIS POINT it would be the customer who has logged on who 
         // would be sent to the CustomerViewModel, for now this is a new instance
@@ -39,8 +40,11 @@ namespace LotteryApp.Pages
        // public CustomerViewModel CustViewModel { get; set; } =
        //     new CustomerViewModel(new Models.Customer("Garry starr", "0131 345678", "g.starr@basil.com"));
 
+       // public CustomerViewModel CustViewModel { get; set; } =
+        //   new CustomerViewModel(App.SignedInCust);   //  note this is set at app.xaml.cs for now to replace logon or authentication
+
         public CustomerViewModel CustViewModel { get; set; } =
-           new CustomerViewModel(App.SignedInCust);   //  note this is set at app.xaml.cs for now to replace logon or authentication
+              new CustomerViewModel(App.SignedInCust);   //  note this is set at app.xaml.cs for now to replace logon or authentication
     }
 
 }

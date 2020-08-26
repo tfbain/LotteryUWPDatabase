@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,18 +42,22 @@ namespace LotteryApp.ViewModels
                 if (_custModel != value)
                 {
                     _custModel = value;
-                    if (!IsModified)
-                    {
-                        Task.Run(RefreshCustomer);   // added 2408 cancel changes
+                    OnPropertyChanged(string.Empty);  //added TB  this is required
+                    //if (!IsModified)   //  only require this here just now as no cancel on exit, when there is a cancel on exit this is redundant 
+                    //{
+                    //    Task.Run(RefreshCustomer);   // added 2408 cancel changes
 
-                        OnPropertyChanged(string.Empty);// added 2408 cancel changes
-                    }
+                    //   OnPropertyChanged(string.Empty);// added 2408 cancel changes
+                    // }
                 }
             }
         }
-        public async Task RefreshCustomer()  // added 2408 cancel changes
+        public async Task RefreshCustomer()  // added 2408 cancel changes, refresh data from database to model
         {
             CustModel = await App.Repository.CustomersR.GetAsync(CustModel.CustID);
+            IsModified = false;
+            OnPropertyChanged(string.Empty);// added 2408 cancel changes
+            App.SignedInCust = CustModel;
         }
 
         /// <summary>
@@ -72,10 +77,11 @@ namespace LotteryApp.ViewModels
             get => CustModel.CustName;
             set
             {
-                if (value != CustModel.CustName)
+              if (value != CustModel.CustName)
                 {
                     CustModel.CustName = value;
                     IsModified = true;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -92,6 +98,7 @@ namespace LotteryApp.ViewModels
                 {
                     CustModel.Email = value;
                     IsModified = true;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -108,6 +115,7 @@ namespace LotteryApp.ViewModels
                 {
                     CustModel.Phone = value;
                     IsModified = true;
+                    OnPropertyChanged();
                 }
             }
         }
