@@ -119,14 +119,14 @@
                 Background="AliceBlue">
                 <AppBarButton
                     Click="{x:Bind CustViewModel.UpdateCustomersAsync}"
-                    Icon="Refresh"
-                    Label="Update"
-                    ToolTipService.ToolTip="Update to server" />
+                    Icon="Save"
+                    Label="Save"
+                    ToolTipService.ToolTip="Save Customer Changes" />
                 <AppBarButton
                     Click="{x:Bind CustViewModel.RefreshCustomer}"
                     Icon="Cancel"
                     Label="Cancel"
-                    ToolTipService.ToolTip="Cancel changes to Customer" />
+                    ToolTipService.ToolTip="Cancel Customer Changes" />
             </CommandBar>
             <TextBlock Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="40" Text="Customer Details" />
             <StackPanel x:Name="sp" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">

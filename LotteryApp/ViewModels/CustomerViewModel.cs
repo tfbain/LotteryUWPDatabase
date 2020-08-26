@@ -52,7 +52,7 @@ namespace LotteryApp.ViewModels
                 }
             }
         }
-        public async Task RefreshCustomer()  // added 2408 cancel changes, refresh data from database to model
+        public async Task RefreshCustomer()  // cancel changes, refreshes data from database to model
         {
             CustModel = await App.Repository.CustomersR.GetAsync(CustModel.CustID);
             IsModified = false;
@@ -97,8 +97,8 @@ namespace LotteryApp.ViewModels
                 if (value != CustModel.Email)
                 {
                     CustModel.Email = value;
-                    IsModified = true;
-                    OnPropertyChanged();
+                    IsModified = true;    //  indicator to say changes have been made to model
+                    OnPropertyChanged();  // ensures two way binding between property and text box
                 }
             }
         }
