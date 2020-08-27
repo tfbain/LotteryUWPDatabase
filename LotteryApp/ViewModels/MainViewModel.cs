@@ -8,27 +8,21 @@ using System.Collections.ObjectModel;
 using Microsoft.Toolkit.Uwp.Helpers;
 
 namespace LotteryApp.ViewModels
-{
+{    
+     /// <summary>
+     /// ViewModel for Logon, email would be sent to main page
+     /// currently no authentication so hard coding logon email for example purposes.
+     /// </summary>
     public class MainViewModel  
     {
-        //public MainViewModel(string email) => Task.Run(()=>GetSignedInAsync(email));
-        public MainViewModel(string email)
-        {
-            Task.Run(() => GetSignedInAsync(email));
-        }
+        public MainViewModel(string email) => Task.Run(()=>GetSignedInAsync(email));
 
-        public Customer SignedInCust { get; set; } 
+        public Customer SignedInCust { get; set; }
+        public Customer TempCust;     //  used to store changes on cancel of customer info
 
         public async Task GetSignedInAsync(string email)             //TB  added this  method, not this would normally be part of authentication
         {
-
-            // CustModel object of type Customer, Customers is the database entity name.
-            //CustModel = (Customer)await App.Repository.Customers.GetEmailAsync(email);
-            //IEnumerable<Customer> custemails = await App.Repository.Customers.GetAsync("g");
-
             SignedInCust = (Customer) await App.Repository.CustomersR.GetEmailAsync(email);
-        
-
         }
 
     }

@@ -51,13 +51,14 @@ namespace LotteryApp.ViewModels
                 }
             }
         }
-        
-        public async Task RefreshCustomer()  // cancel changes, refreshes data from database to model
+        /// <summary>
+        /// Cancels changes on screen, refreshes data for that customer from database
+        /// </summary>
+        public async Task RefreshCustomer()  
         {
             CustModel = await App.Repository.CustomersR.GetAsync(CustModel.CustID);
             IsModified = false;
-            OnPropertyChanged(string.Empty);// added 2408 cancel changes
-            //App.SignedInCust = CustModel;
+            OnPropertyChanged(string.Empty); // added for two way binding
         }
 
         /// <summary>
@@ -120,10 +121,11 @@ namespace LotteryApp.ViewModels
             }
         }
 
-
+        /// <summary>
+        /// updates the Repository's Customers dbSet with the modified Customer Information
+        /// </summary>
         public async Task UpdateCustomersAsync()
         {
-            //update the Repository Customers dbSet with the modified Customer information.
             if (IsModified == true)
             {
                 await App.Repository.CustomersR.UpsertAsync(CustModel);
@@ -131,10 +133,5 @@ namespace LotteryApp.ViewModels
             }
             
         }
-
-       
-
     }
-
-
 }

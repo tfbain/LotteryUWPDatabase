@@ -74,6 +74,10 @@ namespace LotteryApp.Pages
                 // Order is a new order
                 CustViewModel = new CustomerViewModel(new Customer());
             }
+            else if (App.AppViewModel.TempCust != null)   // TempCust used for cancelled changes
+            {
+                CustViewModel = new CustomerViewModel(App.AppViewModel.TempCust);
+            }
             else
             {
                 // Customer is an existing customer.
@@ -96,7 +100,7 @@ namespace LotteryApp.Pages
 
                 await saveDialog.ShowAsync();
                 SaveChangesDialogResult result = saveDialog.Result;
-
+                App.AppViewModel.TempCust = null;
                 switch (result)
                 {
                     case SaveChangesDialogResult.Save:
@@ -106,6 +110,7 @@ namespace LotteryApp.Pages
                         await CustViewModel.RefreshCustomer();
                         break;
                     case SaveChangesDialogResult.Cancel:
+                        App.AppViewModel.TempCust = CustViewModel.CustModel;
                         if (e.NavigationMode == NavigationMode.Back)
                         {
                             Frame.GoForward();
@@ -116,7 +121,7 @@ namespace LotteryApp.Pages
                         }
                         e.Cancel = true;
                         // This flag gets cleared on navigation, so restore it. 
-                        CustomerViewModel tempCust = CustViewModel;
+                       
                         CustViewModel.IsModified = true;
                         break;
                 }
