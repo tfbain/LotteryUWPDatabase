@@ -79,7 +79,6 @@ namespace LotteryApp.Pages
                             Frame.GoBack();
                         }
                         e.Cancel = true;
-
                         // This flag gets cleared on navigation, so restore it. 
                         CustViewModel.IsModified = true;
                         break;

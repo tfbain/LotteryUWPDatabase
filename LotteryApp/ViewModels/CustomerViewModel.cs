@@ -18,8 +18,7 @@ namespace LotteryApp.ViewModels
         {
             // if currentCustModel parameter is null create a new customer,
             // otherwise set CustModel equal to the parameter currentCustModel
-            CustModel = currentCustModel ?? new Customer();    
-               
+            CustModel = currentCustModel ?? new Customer();
         }
 
      
