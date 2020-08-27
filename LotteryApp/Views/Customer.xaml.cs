@@ -21,33 +21,21 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace LotteryApp.Pages
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// Customer page, allows update of customer details.
+    /// INotifyPropertyChanged is inherited to allow for two way binding through propertychanged()
     /// </summary>
     public sealed partial class CustomerPage : Page, INotifyPropertyChanged
     {
         public CustomerPage()
         {
             this.InitializeComponent();
-            // gets or sets the datacontext for the RadDataGrid in the xaml which requires binding
-            DataContext = CustViewModel;   // code below links this to CustomerListPageViewModel
+            // gets or sets the datacontext for the Customer.xaml page, used for binding xaml to customer page
+            DataContext = CustViewModel;   
         }
-
-
-        // creates an instance of the CustomerViewModel
-        // NOTE AT THIS POINT it would be the customer who has logged on who 
-        // would be sent to the CustomerViewModel, for now this is a new instance
-        // Data can be added in the customer.xaml.
-        // public CustomerViewModel CustViewModel { get; set; } =
-        //     new CustomerViewModel(new Models.Customer("Garry starr", "0131 345678", "g.starr@basil.com"));
-
-        // public CustomerViewModel CustViewModel { get; set; } =
-        //   new CustomerViewModel(App.SignedInCust);   //  note this is set at app.xaml.cs for now to replace logon or authentication
-        
+           
         private CustomerViewModel _custViewModel;
         public CustomerViewModel CustViewModel 
         {    get => _custViewModel;
@@ -61,17 +49,16 @@ namespace LotteryApp.Pages
             }
              
         }
-        //      new CustomerViewModel(App.AppViewModel.SignedInCust);   //  note this is set at app.xaml.cs for now to replace logon or authentication
-        
-        
+ 
+        /// <summary>
+        /// Used when navigating to the Customer form to ensure correct Customer model is displayed. 
+        /// </summary>
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
              
-            
-            //      new CustomerViewModel(App.AppViewModel.SignedInCust);
             if (App.AppViewModel.SignedInCust == null)
             {
-                // Order is a new order
+                // This should not happen will display a blank customer
                 CustViewModel = new CustomerViewModel(new Customer());
             }
             else if (App.AppViewModel.TempCust != null)   // TempCust used for cancelled changes
@@ -87,14 +74,18 @@ namespace LotteryApp.Pages
 
             base.OnNavigatedTo(e);
         }
+
+        /// <summary>
+        /// Used when navigating from the Customer form to avoid unsaved changes. 
+        /// </summary>
         protected async override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             if (CustViewModel.IsModified)
             {
                 var saveDialog = new SaveChangesDialog()
                 {
-                    Title = $"Save changes to Customer {CustViewModel.Email.ToString()}?",
-                    Message = $"Customer {CustViewModel.CustModel.ToString()} " +
+                    Title = $"Save changes to Customer {CustViewModel.Email}?",
+                    Message = $"Customer {CustViewModel.CustModel} " +
                         "has unsaved changes that will be lost. Do you want to save your changes?"
                 };
 
@@ -120,8 +111,6 @@ namespace LotteryApp.Pages
                             Frame.GoBack();
                         }
                         e.Cancel = true;
-                        // This flag gets cleared on navigation, so restore it. 
-                       
                         CustViewModel.IsModified = true;
                         break;
                 }
@@ -131,7 +120,7 @@ namespace LotteryApp.Pages
         }
 
         /// <summary>
-        /// Fired when a property value changes. 
+        /// Fired when a property value changes to allow for binding model to xaml page. 
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 

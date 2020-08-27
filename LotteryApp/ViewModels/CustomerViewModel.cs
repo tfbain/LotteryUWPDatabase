@@ -11,13 +11,19 @@ using LotteryApp.Models;
 using Microsoft.Toolkit.Uwp.Helpers;
 
 namespace LotteryApp.ViewModels
-{
+{    
+    /// <summary>
+     /// CustomerViewModel, contains code for interaction with customer page, model and database.
+     /// INotifyPropertyChanged is inherited to allow for two way binding through propertychanged()
+     /// </summary>
     public class CustomerViewModel : INotifyPropertyChanged
-    {
+    {    
+         /// <summary>
+         /// currentCustModel is set in the NavigateTo event for the CustomerPage.
+         /// App allows for only one logged on customer at a time
+         /// </summary>
         public CustomerViewModel(Customer currentCustModel)
         {
-            // if currentCustModel parameter is null create a new customer,
-            // otherwise set CustModel equal to the parameter currentCustModel
             CustModel = currentCustModel ?? new Customer();
         }
 
@@ -26,11 +32,9 @@ namespace LotteryApp.ViewModels
 
         public void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
               PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        //internal Customer CustModel { get; set; }
 
         /// <summary>
-        /// The underlying customer model. Internal so it is 
-        /// not visible to the RadDataGrid. 
+        /// The underlying customer model used within the Customer page.  
         /// </summary>
         private Customer _custModel;
         public Customer CustModel
@@ -42,12 +46,6 @@ namespace LotteryApp.ViewModels
                 {
                     _custModel = value;
                     OnPropertyChanged(string.Empty);  //added TB  this is required
-                    //if (!IsModified)   //  only require this here just now as no cancel on exit, when there is a cancel on exit this is redundant 
-                    //{
-                    //    Task.Run(RefreshCustomer);   // added 2408 cancel changes
-
-                    //   OnPropertyChanged(string.Empty);// added 2408 cancel changes
-                    // }
                 }
             }
         }
