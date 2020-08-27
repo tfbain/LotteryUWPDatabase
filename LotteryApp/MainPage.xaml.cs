@@ -22,7 +22,8 @@ using Windows.UI.Xaml.Navigation;
 namespace LotteryApp
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// An empty page with navigation and a Frame to load different page content
+    /// on navigation events. 
     /// </summary>
     public sealed partial class MainPage : Page
     {

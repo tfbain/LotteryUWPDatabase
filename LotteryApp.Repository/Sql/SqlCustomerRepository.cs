@@ -7,7 +7,10 @@ using LotteryApp.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace LotteryApp.Repository.Sql
-{
+{   
+    /// <summary>
+    /// Class used to code the database interactions for the entity Customers.
+    /// </summary>
     public class SqlCustomerRepository : ICustomerRepository
     {
         private readonly LotteryContext _db;
@@ -17,10 +20,10 @@ namespace LotteryApp.Repository.Sql
             _db = db;
         }
         /// <summary>
-        /// Returns all customers. 
+        /// Returns all customers within the entity Customers. 
         /// a task represents an asynchronous operation that can return a value, 
         /// in this case GetAsync() is returning a list of customers, 
-        /// TASK is actually the return of GetAsync and is an object than contains the result within it.
+        /// TASK is actually the return of GetAsync and is an object than contains a list of Customers as an IEunemerable.
         /// </summary>
         public async Task<IEnumerable<Customer>> GetAsync()
         {
@@ -29,7 +32,8 @@ namespace LotteryApp.Repository.Sql
                 .ToListAsync();  // creates a list from the queriable db customers
         }
         /// <summary>
-        /// Returns the customer with the given ID. 
+        /// Returns a Customer object based on the Customer Model containg 
+        /// the customer details from the entity Customers matching the given ID. 
         /// </summary>
         public async Task<Customer> GetAsync(Guid id)
         {
@@ -38,7 +42,8 @@ namespace LotteryApp.Repository.Sql
                 .FirstOrDefaultAsync(x => x.CustID == id);   // searches for a customer with the specific ID and returns if exists ?????
         }
         /// <summary>
-        /// Returns the customer with the given Email.  RETURNS a Customer object 
+        /// Returns a Customer object based on the Customer Model containg 
+        /// the customer details from the entity Customers matching the given email.   
         /// </summary>
         public async Task<Customer> GetEmailAsync(string email)
         {
