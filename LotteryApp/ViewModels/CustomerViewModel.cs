@@ -51,12 +51,13 @@ namespace LotteryApp.ViewModels
                 }
             }
         }
+        
         public async Task RefreshCustomer()  // cancel changes, refreshes data from database to model
         {
             CustModel = await App.Repository.CustomersR.GetAsync(CustModel.CustID);
             IsModified = false;
             OnPropertyChanged(string.Empty);// added 2408 cancel changes
-            App.SignedInCust = CustModel;
+            //App.SignedInCust = CustModel;
         }
 
         /// <summary>

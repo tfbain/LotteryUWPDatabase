@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.Globalization;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -16,6 +17,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using LotteryApp.Repository;
 using LotteryApp.Repository.Sql;
+using LotteryApp.ViewModels;
 using Windows.Storage;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.Sqlite;
@@ -32,7 +34,8 @@ namespace LotteryApp
     {
         // Initialises an instance of the database entities to be manipulated, coded in ItutorialRepository
         public static ILotteryRepository Repository { get; set; }
-        public static  Customer SignedInCust;
+        //public static  Customer SignedInCust;   //2708
+        public static MainViewModel AppViewModel { get; } = new MainViewModel("g.starr@basil.com"); //2708
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -130,8 +133,8 @@ namespace LotteryApp
             }
             var dbOptions = new DbContextOptionsBuilder<LotteryContext>().UseSqlite("Data Source=" + databasePath);
             Repository = new SqlLotteryRepository(dbOptions);
-            string email = "g.starr@basil.com";   //  this would be replaced with authentication or login
-            Task.Run(()=>GetSignedInAsync(email));
+            //string email = "g.starr@basil.com";   //  this would be replaced with authentication or login
+            //Task.Run(()=>GetSignedInAsync(email));
 
             // ****  THE FOLLOWING CODE WOULD REPLACE THE ABOVE CODE TO CREATE AN INITIAL INSTANCE OF THE DATABASE ****
             //string databasePath = ApplicationData.Current.LocalFolder.Path + @"\fffLottoAppDbRepository.db";
@@ -173,17 +176,17 @@ namespace LotteryApp
             //Repository = new SqlLotteryRepository(dbOptions);
         }
 
-        public static async Task GetSignedInAsync(string email)             //TB  added this  method, not this would normally be part of authentication
-        {
+        //public static async Task GetSignedInAsync(string email)             //TB  added this  method, not this would normally be part of authentication
+        //{
             
             // CustModel object of type Customer, Customers is the database entity name.
             //CustModel = (Customer)await App.Repository.Customers.GetEmailAsync(email);
             //IEnumerable<Customer> custemails = await App.Repository.Customers.GetAsync("g");
 
-            SignedInCust = await App.Repository.CustomersR.GetEmailAsync(email);
+           // SignedInCust = await App.Repository.CustomersR.GetEmailAsync(email);
 
 
-        }
+        //}
     }
 }
 

@@ -15,6 +15,10 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using LotteryApp.ViewModels;
 using LotteryApp.Views;
+using LotteryApp.Models;
+using LotteryApp;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -24,7 +28,7 @@ namespace LotteryApp.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class CustomerPage : Page
+    public sealed partial class CustomerPage : Page, INotifyPropertyChanged
     {
         public CustomerPage()
         {
@@ -33,20 +37,52 @@ namespace LotteryApp.Pages
             DataContext = CustViewModel;   // code below links this to CustomerListPageViewModel
         }
 
-        
+
         // creates an instance of the CustomerViewModel
         // NOTE AT THIS POINT it would be the customer who has logged on who 
         // would be sent to the CustomerViewModel, for now this is a new instance
         // Data can be added in the customer.xaml.
-       // public CustomerViewModel CustViewModel { get; set; } =
-       //     new CustomerViewModel(new Models.Customer("Garry starr", "0131 345678", "g.starr@basil.com"));
+        // public CustomerViewModel CustViewModel { get; set; } =
+        //     new CustomerViewModel(new Models.Customer("Garry starr", "0131 345678", "g.starr@basil.com"));
 
-       // public CustomerViewModel CustViewModel { get; set; } =
+        // public CustomerViewModel CustViewModel { get; set; } =
         //   new CustomerViewModel(App.SignedInCust);   //  note this is set at app.xaml.cs for now to replace logon or authentication
+        
+        private CustomerViewModel _custViewModel;
+        public CustomerViewModel CustViewModel 
+        {    get => _custViewModel;
+            set
+            {
+                if (_custViewModel != value)
+                {
+                    _custViewModel = value;
+                    OnPropertyChanged();
+                }
+            }
+             
+        }
+        //      new CustomerViewModel(App.AppViewModel.SignedInCust);   //  note this is set at app.xaml.cs for now to replace logon or authentication
+        
+        
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        {
+             
+            
+            //      new CustomerViewModel(App.AppViewModel.SignedInCust);
+            if (App.AppViewModel.SignedInCust == null)
+            {
+                // Order is a new order
+                CustViewModel = new CustomerViewModel(new Customer());
+            }
+            else
+            {
+                // Customer is an existing customer.
+                var customer = await App.Repository.CustomersR.GetAsync(App.AppViewModel.SignedInCust.CustID);
+                CustViewModel = new CustomerViewModel(customer);
+            }
 
-        public CustomerViewModel CustViewModel { get; set; } =
-              new CustomerViewModel(App.SignedInCust);   //  note this is set at app.xaml.cs for now to replace logon or authentication
-
+            base.OnNavigatedTo(e);
+        }
         protected async override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             if (CustViewModel.IsModified)
@@ -80,16 +116,27 @@ namespace LotteryApp.Pages
                         }
                         e.Cancel = true;
                         // This flag gets cleared on navigation, so restore it. 
+                        CustomerViewModel tempCust = CustViewModel;
                         CustViewModel.IsModified = true;
                         break;
                 }
             }
-
+            
             base.OnNavigatingFrom(e);
         }
 
+        /// <summary>
+        /// Fired when a property value changes. 
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// Notifies listeners that a property value changed. 
+        /// </summary>
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
-
 }
+
+
 
