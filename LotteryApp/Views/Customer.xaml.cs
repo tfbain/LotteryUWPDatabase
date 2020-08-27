@@ -53,8 +53,8 @@ namespace LotteryApp.Pages
             {
                 var saveDialog = new SaveChangesDialog()
                 {
-                    Title = $"Save changes to Invoice # {CustViewModel.Email.ToString()}?",
-                    Message = $"Invoice # {CustViewModel.Email.ToString()} " +
+                    Title = $"Save changes to Customer {CustViewModel.Email.ToString()}?",
+                    Message = $"Customer {CustViewModel.CustModel.ToString()} " +
                         "has unsaved changes that will be lost. Do you want to save your changes?"
                 };
 

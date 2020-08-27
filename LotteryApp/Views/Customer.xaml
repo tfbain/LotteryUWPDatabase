@@ -157,13 +157,13 @@
                          Text="{x:Bind CustViewModel.Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          Margin="10"
                      Foreground="DarkSlateGray" TextWrapping="Wrap" Background="white" BorderBrush="White" />
-             <!--   extensions:TextBoxRegex.ValidationType="PhoneNumber"
+                <!--   extensions:TextBoxRegex.ValidationType="PhoneNumber"
                          extensions:TextBoxRegex.ValidationMode="Forced"/>-->
 
-                <StackPanel Grid.Row="4" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="center">
+                <!--<StackPanel Grid.Row="4" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="center">
                     <Button x:Name="btnSave"  Foreground="#FF191818" FontSize ="25" Margin="3" Content="Save" IsEnabled="False"/>
                     <Button x:Name="btnCancel"  Foreground="#FF191818" FontSize ="25" Margin="3" Content="Cancel"/>
-                </StackPanel>
+                </StackPanel>-->
             </StackPanel>
         </Grid>
     </Grid>
