@@ -46,17 +46,9 @@ namespace LotteryApp.ViewModels
                 {
                     _custModel = value;
                     OnPropertyChanged(string.Empty);  //added TB  this is required
+
                 }
             }
-        }
-        /// <summary>
-        /// Cancels changes on screen, refreshes data for that customer from database
-        /// </summary>
-        public async Task RefreshCustomer()  
-        {
-            CustModel = await App.Repository.CustomersR.GetAsync(CustModel.CustID);
-            IsModified = false;
-            OnPropertyChanged(string.Empty); // added for two way binding
         }
 
         /// <summary>
@@ -65,7 +57,6 @@ namespace LotteryApp.ViewModels
         /// and only upload the models that changed.
         /// </summary>
         internal bool IsModified { get; set; }
-
 
 
         /// <summary>
@@ -131,5 +122,16 @@ namespace LotteryApp.ViewModels
             }
             
         }
+
+        /// <summary>
+        /// Cancels changes on screen, refreshes data for that customer from database
+        /// </summary>
+        public async Task RefreshCustomer()
+        {
+            CustModel = await App.Repository.CustomersR.GetAsync(CustModel.CustID);
+            IsModified = false;
+            OnPropertyChanged(string.Empty); // added for two way binding
+        }
+
     }
 }

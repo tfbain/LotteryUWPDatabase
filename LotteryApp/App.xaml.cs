@@ -34,7 +34,9 @@ namespace LotteryApp
     {
         // Initialises an instance of the database entities to be manipulated, coded in ItutorialRepository
         public static ILotteryRepository Repository { get; set; }
-        //public static  Customer SignedInCust;   //2708
+
+        // This MainViewModel is added at this point to store the signed in User, note this is hard coded for now
+        // this would be replaced with an authentication process
         public static MainViewModel AppViewModel { get; } = new MainViewModel("g.starr@basil.com"); //2708
 
         /// <summary>
@@ -133,9 +135,7 @@ namespace LotteryApp
             }
             var dbOptions = new DbContextOptionsBuilder<LotteryContext>().UseSqlite("Data Source=" + databasePath);
             Repository = new SqlLotteryRepository(dbOptions);
-            //string email = "g.starr@basil.com";   //  this would be replaced with authentication or login
-            //Task.Run(()=>GetSignedInAsync(email));
-
+          
             // ****  THE FOLLOWING CODE WOULD REPLACE THE ABOVE CODE TO CREATE AN INITIAL INSTANCE OF THE DATABASE ****
             //string databasePath = ApplicationData.Current.LocalFolder.Path + @"\fffLottoAppDbRepository.db";
 
@@ -176,17 +176,6 @@ namespace LotteryApp
             //Repository = new SqlLotteryRepository(dbOptions);
         }
 
-        //public static async Task GetSignedInAsync(string email)             //TB  added this  method, not this would normally be part of authentication
-        //{
-            
-            // CustModel object of type Customer, Customers is the database entity name.
-            //CustModel = (Customer)await App.Repository.Customers.GetEmailAsync(email);
-            //IEnumerable<Customer> custemails = await App.Repository.Customers.GetAsync("g");
-
-           // SignedInCust = await App.Repository.CustomersR.GetEmailAsync(email);
-
-
-        //}
     }
 }
 

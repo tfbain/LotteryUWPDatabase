@@ -115,7 +115,6 @@ namespace LotteryApp.Pages
                         break;
                 }
             }
-            
             base.OnNavigatingFrom(e);
         }
 

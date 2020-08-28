@@ -55,7 +55,7 @@ namespace LotteryApp.Repository.Sql
         /// <summary>
         /// Returns all customers with a data field matching the start of the given string. RETURNS A LIST 
         /// </summary>
-        public async Task<IEnumerable<Customer>> GetAsync(string value)    //   NOT REQUIRED ******************
+        public async Task<IEnumerable<Customer>> GetAsync(string value)    //   NOT Utilised at the moment ******************
         {
             string[] parameters = value.Split(' ');
             return await _db.Customers

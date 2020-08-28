@@ -37,8 +37,6 @@ namespace LotteryApp.Repository
         /// existing customer otherwise.
         /// </summary>
         Task<Customer> UpsertAsync(Customer customer);
-
- 
    
     }
 }
